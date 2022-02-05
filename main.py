@@ -1,28 +1,18 @@
-MONTHS = 12  # constant for months/year
-rain_accum = 0.0  # initializes accumulator
+# get speed and hours traveled from user
+speed = int(input('What is the speed of the vehicle in mph? '))
+hours = int(input('How many hours has it traveled? '))
 
-number_of_years = int(input('How many years do you want to enter data? '))  # gets number of years
+# data validation: all values must be > 0
+while speed <= 0 or hours <= 0:
+    print('Error! values entered must be positive.')
+    speed = int(input('What is the speed of the vehicle in mph? '))
+    hours = int(input('How many hours has it traveled? '))
 
-while number_of_years < 1:
-    print('error! Data must be entered for at least 1 year!')
-    number_of_years = int(input('How many years do you want to enter data? '))
+# generate table header
+print('Hours \t Distance Traveled')
+print('--------------------------')
 
-# algorithm for data accumulation
-for number in range(0, number_of_years):
-    for counter in range(MONTHS):
-        monthly_rain = float(input('Enter the rainfall in inches:'))
-        rain_accum += monthly_rain
-        while monthly_rain < 0:
-            print('Error! must enter data for the month.')
-            print('If no rainfall occurred, enter 0')
-            counter -= 0
-            monthly_rain = float(input('Enter the rainfall in inches:'))
-            rain_accum += monthly_rain
-
-#   calculates average of all rainfall data
-total_months = number_of_years * MONTHS
-average_rain = rain_accum / total_months
-
-#   returns calculations
-print('Over a period of', total_months, 'months, the total rainfall was:', rain_accum, 'inches')
-print('The average rainfall was:', format(average_rain, '.2f'), 'inches')
+# generate table contents starting at hour 1, continuing until #of hours specified by user
+for i in range(1, hours + 1):
+    distance_traveled = i * speed
+    print(' ', i, '\t\t\t', distance_traveled)
